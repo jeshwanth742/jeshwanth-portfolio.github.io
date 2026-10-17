@@ -1,356 +1,434 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeshwanth Chintalapudi | Data Analyst</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#020617">
+  <meta name="description" content="Jeshwanth Chintalapudi's portfolio featuring data analytics projects in SQL, Python, Power BI, Excel and BigQuery.">
+  <title>Jeshwanth Chintalapudi | Data Analyst Portfolio</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        slate: { 850: '#151e2e', 900: '#0f172a', 950: '#020617' },
-                        cyan: { 400: '#22d3ee', 500: '#06b6d4' }
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
-                }
-            }
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: "#22d3ee"
+          }
         }
-    </script>
+      }
+    };
+  </script>
 
-    <style>
-        html { scroll-behavior: smooth; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { background: #020617; }
+    ::selection { background: #0891b2; color: white; }
 
-        .glass-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
+    .glass {
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      backdrop-filter: blur(12px);
+    }
 
-        .code-syntax-blue { color: #60a5fa; }
-        .code-syntax-green { color: #4ade80; }
-        .code-syntax-purple { color: #c084fc; }
-    </style>
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 30px;
+      height: 4px;
+      background: #22d3ee;
+      border-radius: 5px;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+
+    .nav-link { transition: color .2s ease; }
+    .nav-link:hover, .nav-link:focus-visible { color: #22d3ee; }
+
+    .project-card { transition: transform .2s ease, border-color .2s ease; }
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(34, 211, 238, .45);
+    }
+
+    a:focus-visible {
+      outline: 2px solid #22d3ee;
+      outline-offset: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-slate-950 text-slate-200 font-sans antialiased overflow-x-hidden">
+<body class="text-slate-200 antialiased">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 py-4 px-6 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/50">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <a href="#about" class="text-2xl font-bold tracking-tight">
-                Jeshwanth<span class="text-cyan-400">.</span>
-            </a>
+  <!-- Navigation -->
+  <header class="fixed top-0 z-50 w-full border-b border-slate-800 bg-slate-950/95 backdrop-blur">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4"
+         aria-label="Main navigation">
+      <a href="#about" class="text-xl font-bold text-white">
+        Jeshwanth<span class="text-cyan-400">.</span>
+      </a>
 
-            <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
-                <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience</a>
-                <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
-                <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
-                <a href="#certifications" class="hover:text-cyan-400 transition-colors">Certifications</a>
-                <a href="#contact" class="px-4 py-2 rounded-full border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all">Contact Me</a>
-            </div>
-        </div>
+      <button id="menu-toggle"
+              class="rounded-lg border border-slate-700 p-2 text-slate-200 md:hidden"
+              aria-label="Open navigation menu"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              type="button">
+        <i data-lucide="menu" class="h-5 w-5"></i>
+      </button>
+
+      <div class="hidden items-center gap-6 text-sm md:flex">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#experience">Experience</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#education">Education</a>
+        <a class="nav-link" href="#certifications">Certifications</a>
+        <a href="#contact"
+           class="rounded-lg border border-cyan-500/50 px-4 py-2 text-cyan-300 hover:bg-cyan-500/10">
+          Contact Me
+        </a>
+      </div>
     </nav>
 
-    <!-- Hero / About -->
-    <section id="about" class="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden">
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] -z-10"></div>
-        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] -z-10"></div>
+    <div id="mobile-menu" class="hidden border-t border-slate-800 bg-slate-950 px-5 py-4 md:hidden">
+      <div class="flex flex-col gap-4 text-sm">
+        <a class="nav-link mobile-link" href="#about">About</a>
+        <a class="nav-link mobile-link" href="#experience">Experience</a>
+        <a class="nav-link mobile-link" href="#projects">Projects</a>
+        <a class="nav-link mobile-link" href="#skills">Skills</a>
+        <a class="nav-link mobile-link" href="#education">Education</a>
+        <a class="nav-link mobile-link" href="#certifications">Certifications</a>
+        <a class="nav-link mobile-link" href="#contact">Contact Me</a>
+      </div>
+    </div>
+  </header>
 
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
-            <div class="space-y-6">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/30 border border-cyan-500/30 text-cyan-300 text-xs font-semibold uppercase tracking-wide">
-                    <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
-                    Open to Data Analytics Opportunities
-                </div>
+  <main>
+    <!-- About / Hero -->
+    <section id="about" class="relative overflow-hidden px-5 pb-20 pt-32 md:pb-28 md:pt-40">
+      <div class="pointer-events-none absolute -right-32 -top-20 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-20 -left-32 h-80 w-80 rounded-full bg-blue-600/10 blur-3xl"></div>
 
-                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">
-                    Data Analyst · Hyderabad, India
-                </p>
+      <div class="relative mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
+        <div>
+          <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-cyan-300">
+            <span class="h-2 w-2 rounded-full bg-cyan-400"></span>
+            Data Analytics Portfolio
+          </p>
 
-                <h1 class="text-5xl md:text-7xl font-bold leading-tight">
-                    Hi, I'm <span class="text-cyan-400">Jeshwanth</span>.<br>
-                    I turn data into<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">actionable insights.</span>
-                </h1>
+          <p class="mb-3 text-sm font-medium uppercase tracking-widest text-slate-400">
+            Hyderabad, India
+          </p>
 
-                <p class="text-lg text-slate-300 max-w-xl leading-relaxed">
-                    Aspiring Data Analyst skilled in SQL, Python, Power BI and Excel.
-                    I clean and explore datasets, uncover trends, and build clear
-                    dashboards that help teams make informed decisions.
-                </p>
+          <h1 class="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            Jeshwanth<br>
+            <span class="text-cyan-400">Chintalapudi</span>
+          </h1>
 
-                <div class="flex flex-wrap gap-2 text-sm">
-                    <span class="px-3 py-1.5 rounded-full border border-slate-700 bg-slate-900/70 text-slate-300">SQL & BigQuery</span>
-                    <span class="px-3 py-1.5 rounded-full border border-slate-700 bg-slate-900/70 text-slate-300">Python · Pandas</span>
-                    <span class="px-3 py-1.5 rounded-full border border-slate-700 bg-slate-900/70 text-slate-300">Power BI · DAX</span>
-                    <span class="px-3 py-1.5 rounded-full border border-slate-700 bg-slate-900/70 text-slate-300">Excel · Power Query</span>
-                </div>
+          <h2 class="mt-4 text-xl font-semibold text-slate-200 sm:text-2xl">
+            Aspiring Data Analyst
+          </h2>
 
-                <div class="flex flex-wrap gap-4 pt-3">
-                    <a href="#projects" class="px-8 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-1 transition-all">
-                        Explore Projects
-                    </a>
+          <p class="mt-6 max-w-xl leading-8 text-slate-400">
+            Detail-oriented graduate skilled in SQL, Python, Power BI and Excel.
+            Interested in transforming raw data into meaningful insights through
+            data cleaning, exploratory analysis, reporting and interactive dashboards.
+          </p>
 
-                    <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 glass-card text-white font-semibold rounded-lg hover:bg-white/5 transition-all flex items-center gap-2">
-                        <i data-lucide="download" class="w-4 h-4"></i>
-                        Download Resume
-                    </a>
-                </div>
+          <div class="mt-6 flex flex-wrap gap-2">
+            <span class="rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-sm">SQL & MySQL</span>
+            <span class="rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-sm">Python & Pandas</span>
+            <span class="rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-sm">Power BI & DAX</span>
+            <span class="rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-sm">Excel</span>
+            <span class="rounded-full border border-slate-700 bg-slate-900 px-3 py-2 text-sm">BigQuery</span>
+          </div>
 
-                <div class="flex gap-6 pt-4 text-slate-400">
-                    <a aria-label="LinkedIn profile" href="https://www.linkedin.com/in/jeshwanth-ch/" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">
-                        <i data-lucide="linkedin" class="w-6 h-6"></i>
-                    </a>
-                    <a aria-label="GitHub profile" href="https://github.com/jeshwanth742" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition-colors">
-                        <i data-lucide="github" class="w-6 h-6"></i>
-                    </a>
-                    <a aria-label="Email Jeshwanth" href="mailto:jeshwanth.ch2@gmail.com" class="hover:text-cyan-400 transition-colors">
-                        <i data-lucide="mail" class="w-6 h-6"></i>
-                    </a>
-                </div>
-            </div>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#projects"
+               class="inline-flex items-center gap-2 rounded-lg bg-cyan-500 px-5 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400">
+              View Projects
+              <i data-lucide="arrow-down-right" class="h-4 w-4"></i>
+            </a>
 
-            <!-- Profile Photo: upload profile.jpg to the same repository folder -->
-            <div class="relative mx-auto w-full max-w-sm">
-                <div class="absolute -inset-4 rounded-3xl bg-gradient-to-br from-cyan-500/20 to-blue-600/10 blur-2xl"></div>
+            <a href="resume.pdf" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-5 py-3 font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-300">
+              <i data-lucide="file-text" class="h-4 w-4"></i>
+              View Resume
+            </a>
+          </div>
 
-                <div class="relative rounded-3xl border border-slate-700 bg-slate-900/80 p-3 shadow-2xl">
-                    <img
-                        src="profile.png"
-                        alt="Jeshwanth Chintalapudi profile photo"
-                        class="w-full aspect-[4/5] object-cover object-center rounded-2xl"
-                        loading="eager"
-                    >
-
-                    <div class="px-4 py-4">
-                        <p class="text-xl font-semibold text-white">Jeshwanth Chintalapudi</p>
-                        <p class="text-sm text-slate-400 mt-1">SQL · Python · Power BI · Data Storytelling</p>
-                    </div>
-                </div>
-
-                <div class="absolute -bottom-5 -left-5 hidden sm:block rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 shadow-xl">
-                    <p class="text-xs uppercase tracking-wider text-slate-500">Focus</p>
-                    <p class="font-semibold text-cyan-300">Data to decisions</p>
-                </div>
-            </div>
+          <div class="mt-7 flex items-center gap-5 text-slate-400">
+            <a href="https://www.linkedin.com/in/jeshwanth-ch/"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="LinkedIn profile" class="hover:text-cyan-400">
+              <i data-lucide="linkedin" class="h-6 w-6"></i>
+            </a>
+            <a href="https://github.com/jeshwanth742"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="GitHub profile" class="hover:text-cyan-400">
+              <i data-lucide="github" class="h-6 w-6"></i>
+            </a>
+            <a href="mailto:jeshwanth.ch2@gmail.com"
+               aria-label="Send email" class="hover:text-cyan-400">
+              <i data-lucide="mail" class="h-6 w-6"></i>
+            </a>
+          </div>
         </div>
+
+        <!-- Keep profile.png in the same folder as index.html -->
+        <div class="mx-auto w-full max-w-sm">
+          <div class="rounded-3xl border border-slate-700 bg-slate-900 p-3 shadow-2xl shadow-cyan-950/30">
+            <img
+              src="profile.png"
+              alt="Jeshwanth Chintalapudi"
+              class="aspect-[4/5] w-full rounded-2xl object-cover object-center"
+              width="600"
+              height="750"
+              fetchpriority="high"
+              onerror="this.onerror=null; this.alt='Profile photo unavailable. Check that profile.png is in the same folder as index.html.'; this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"
+            >
+            <div class="hidden rounded-xl border border-dashed border-slate-700 p-8 text-center text-sm text-slate-400">
+              Profile photo unavailable.<br>
+              Confirm that <strong>profile.png</strong> exists in the repository root.
+            </div>
+            <div class="px-4 py-5">
+              <p class="text-lg font-bold text-white">Jeshwanth Chintalapudi</p>
+              <p class="mt-1 text-sm text-slate-400">SQL · Python · Power BI · Analytics</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Experience -->
-    <section id="experience" class="py-24 bg-slate-900/50">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
-                <span class="w-8 h-1 bg-cyan-400 rounded-full"></span>
-                Experience
-            </h2>
+    <section id="experience" class="border-y border-slate-800/70 bg-slate-900/50 px-5 py-20">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="section-title text-3xl font-bold text-white">Experience</h2>
 
-            <div class="border-l-2 border-slate-800 ml-3 space-y-12">
-                <div class="relative pl-8 group">
-                    <span class="absolute -left-[9px] top-2 w-4 h-4 rounded-full border-4 border-slate-900 bg-cyan-500 group-hover:scale-125 transition-transform"></span>
-
-                    <div class="glass-card p-6 rounded-xl hover:border-cyan-500/30 transition-all">
-                        <div class="flex flex-wrap justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Data Analytics Trainee</h3>
-                                <p class="text-cyan-400">MedTourEasy (Virtual Internship)</p>
-                            </div>
-                            <span class="text-sm font-mono text-slate-500 bg-slate-900 px-3 py-1 rounded-full">
-                                Mar 2025 - Apr 2025
-                            </span>
-                        </div>
-
-                        <ul class="list-disc list-outside ml-4 space-y-2 text-slate-400 text-sm">
-                            <li>Analyzed healthcare tourism datasets, reducing preparation time by 30% through advanced Excel transformation.</li>
-                            <li>Managed datasets with 800+ chemical components using Google Cloud Platform and BigQuery.</li>
-                            <li>Created dashboards identifying patterns 20% faster for stakeholders.</li>
-                        </ul>
-                    </div>
-                </div>
+        <article class="glass mt-10 rounded-2xl p-6 md:p-8">
+          <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
+            <div>
+              <h3 class="text-xl font-bold text-white">Data Analytics Trainee</h3>
+              <p class="mt-1 text-cyan-300">MedTourEasy · Virtual Internship</p>
             </div>
-        </div>
+            <span class="w-fit rounded-full bg-slate-800 px-3 py-2 text-sm text-slate-300">
+              March 2025 – April 2025
+            </span>
+          </div>
+
+          <ul class="mt-6 list-disc space-y-3 pl-5 leading-7 text-slate-400">
+            <li>Used Google Cloud Platform and BigQuery to query and analyze datasets containing 800+ chemical components.</li>
+            <li>Applied Excel Power Query and filtering techniques to reduce data preparation time by 30%.</li>
+            <li>Built an interactive Power BI dashboard for diabetes trend analysis, helping stakeholders identify patterns 20% faster.</li>
+            <li>Collaborated with a four-member remote analytics team and delivered the final presentation and project deliverables on time.</li>
+          </ul>
+        </article>
+      </div>
     </section>
 
     <!-- Projects -->
-    <section id="projects" class="py-24">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
-                <span class="w-8 h-1 bg-cyan-400 rounded-full"></span>
-                Featured Projects
-            </h2>
+    <section id="projects" class="px-5 py-20">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="section-title text-3xl font-bold text-white">Featured Projects</h2>
+        <p class="mt-4 max-w-2xl leading-7 text-slate-400">
+          Selected projects demonstrating data cleaning, SQL analysis, dashboard development
+          and business-focused reporting.
+        </p>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 
-                <!-- Netflix Project -->
-                <div class="glass-card rounded-xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
-                    <div class="h-2 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-bold group-hover:text-cyan-400 transition-colors">Netflix Analysis</h3>
-                            <i data-lucide="film" class="text-slate-600"></i>
-                        </div>
-
-                        <p class="text-slate-400 text-sm mb-6 min-h-20">
-                            Analyzed 1,000+ movies to uncover content trends. Optimized SQL queries to handle NULL values, ensuring 99% data consistency.
-                        </p>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-2 py-1 text-xs rounded bg-slate-800 text-cyan-400 border border-slate-700">SQL</span>
-                            <span class="px-2 py-1 text-xs rounded bg-slate-800 text-cyan-400 border border-slate-700">Google Sheets</span>
-                        </div>
-
-                        <a href="https://github.com/jeshwanth742/Netflix-Movies-Data-Analysis-using-sql" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-semibold text-white hover:text-cyan-400">
-                            View on GitHub <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Customer Churn Project -->
-                <div class="glass-card rounded-xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
-                    <div class="h-2 bg-gradient-to-r from-purple-500 to-pink-500"></div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-bold group-hover:text-cyan-400 transition-colors">Churn Analysis</h3>
-                            <i data-lucide="users" class="text-slate-600"></i>
-                        </div>
-
-                        <p class="text-slate-400 text-sm mb-6 min-h-20">
-                            Identified a 26.86% churn rate across 6,687 customers. Analyzed competitor offers and customer attrition patterns using Python and Power BI.
-                        </p>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-2 py-1 text-xs rounded bg-slate-800 text-purple-400 border border-slate-700">Power BI</span>
-                            <span class="px-2 py-1 text-xs rounded bg-slate-800 text-purple-400 border border-slate-700">Python</span>
-                        </div>
-
-                        <a href="https://github.com/jeshwanth742/Analyzing-Customer-Churn" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-semibold text-white hover:text-cyan-400">
-                            View on GitHub <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Pie Bakery Project -->
-                <div class="glass-card rounded-xl overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
-                    <div class="h-2 bg-gradient-to-r from-orange-400 to-yellow-500"></div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-bold group-hover:text-cyan-400 transition-colors">Pie Bakery Performance</h3>
-                            <i data-lucide="pie-chart" class="text-slate-600"></i>
-                        </div>
-
-                        <p class="text-slate-400 text-sm mb-6 min-h-20">
-                            Designed a star-schema model improving query speed by 20%. Analyzed sales, waste, and inventory to identify opportunities for better performance.
-                        </p>
-
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-2 py-1 text-xs rounded bg-slate-800 text-orange-400 border border-slate-700">Power BI</span>
-                            <span class="px-2 py-1 text-xs rounded bg-slate-800 text-orange-400 border border-slate-700">DAX</span>
-                            <span class="px-2 py-1 text-xs rounded bg-slate-800 text-orange-400 border border-slate-700">Data Modeling</span>
-                        </div>
-
-                        <a href="https://github.com/jeshwanth742/Pie-Bakery-Performance-Analysis-using-power-bi" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-semibold text-white hover:text-cyan-400">
-                            View on GitHub <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
+          <article class="project-card glass flex flex-col rounded-2xl p-6">
+            <div class="mb-5 flex items-center justify-between">
+              <div class="rounded-xl bg-cyan-500/10 p-3 text-cyan-300">
+                <i data-lucide="clapperboard" class="h-6 w-6"></i>
+              </div>
+              <span class="text-xs uppercase tracking-wider text-slate-500">SQL Analysis</span>
             </div>
+
+            <h3 class="text-xl font-bold text-white">Netflix Movies Data Analysis</h3>
+            <p class="mt-4 flex-1 leading-7 text-slate-400">
+              Analyzed 1,000+ movie entries to explore ratings, duration and release patterns.
+              Used SQL data-cleaning queries to handle missing director values and improve dataset reliability.
+            </p>
+
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="rounded bg-slate-800 px-2 py-1 text-xs text-cyan-300">MySQL</span>
+              <span class="rounded bg-slate-800 px-2 py-1 text-xs text-cyan-300">Google Sheets</span>
+              <span class="rounded bg-slate-800 px-2 py-1 text-xs text-cyan-300">Data Cleaning</span>
+            </div>
+
+            <a href="https://github.com/jeshwanth742/Netflix-Movies-Data-Analysis-using-sql"
+               target="_blank" rel="noopener noreferrer"
+               class="mt-6 inline-flex items-center gap-2 font-semibold text-white hover:text-cyan-300">
+              View project on GitHub <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </a>
+          </article>
+
+          <article class="project-card glass flex flex-col rounded-2xl p-6">
+            <div class="mb-5 flex items-center justify-between">
+              <div class="rounded-xl bg-purple-500/10 p-3 text-purple-300">
+                <i data-lucide="users" class="h-6 w-6"></i>
+              </div>
+              <span class="text-xs uppercase tracking-wider text-slate-500">Customer Analytics</span>
+            </div>
+
+            <h3 class="text-xl font-bold text-white">Customer Churn Analysis</h3>
+            <p class="mt-4 flex-1 leading-7 text-slate-400">
+              Cleaned and analyzed customer data for 6,687 customers. Identified a 26.86% churn
+              rate and investigated competitor offers and senior-customer attrition as potential churn factors.
+            </p>
+
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="rounded bg-slate-800 px-2 py-1 text-xs text-purple-300">Python</span>
+              <span class="rounded bg-slate-800 px-2 py-1 text-xs text-purple-300">Pandas</span>
+              <span class="rounded bg-slate-800 px-2 py-1 text-xs text-purple-300">Power BI</span>
+            </div>
+
+            <a href="https://github.com/jeshwanth742/Analyzing-Customer-Churn"
+               target="_blank" rel="noopener noreferrer"
+               class="mt-6 inline-flex items-center gap-2 font-semibold text-white hover:text-cyan-300">
+              View project on GitHub <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </a>
+          </article>
+
+          <article class="project-card glass flex flex-col rounded-2xl p-6">
+            <div class="mb-5 flex items-center justify-between">
+              <div class="rounded-xl bg-orange-500/10 p-3 text-orange-300">
+                <i data-lucide="chart-no-axes-combined" class="h-6 w-6"></i>
+              </div>
+              <span class="text-xs uppercase tracking-wider text-slate-500">BI Dashboard</span>
+            </div>
+
+            <h3 class="text-xl font-bold text-white">Pie Bakery Performance Analysis</h3>
+            <p class="mt-4 flex-1 leading-7 text-slate-400">
+              Built a Power BI performance analysis using a star-schema data model.
+              Compared sales and waste, identified high-loss product categories and explored
+              dynamic pricing opportunities.
+            </p>
+
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="rounded bg-slate-800 px-2 py-1 text-xs text-orange-300">Power BI</span>
+              <span class="rounded bg-slate-800 px-2 py-1 text-xs text-orange-300">DAX</span>
+              <span class="rounded bg-slate-800 px-2 py-1 text-xs text-orange-300">Data Modeling</span>
+            </div>
+
+            <a href="https://github.com/jeshwanth742/Pie-Bakery-Performance-Analysis-using-power-bi"
+               target="_blank" rel="noopener noreferrer"
+               class="mt-6 inline-flex items-center gap-2 font-semibold text-white hover:text-cyan-300">
+              View project on GitHub <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </a>
+          </article>
+
         </div>
+      </div>
     </section>
 
-    <!-- Technical Skills -->
-    <section id="skills" class="py-24 bg-slate-900/50">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 flex items-center gap-3">
-                <span class="w-8 h-1 bg-cyan-400 rounded-full"></span>
-                Technical Skills
-            </h2>
+    <!-- Skills -->
+    <section id="skills" class="border-y border-slate-800/70 bg-slate-900/50 px-5 py-20">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="section-title text-3xl font-bold text-white">Technical Skills</h2>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                <div class="p-4 glass-card rounded-lg text-center hover:bg-slate-800 transition-colors">
-                    <i data-lucide="database" class="w-8 h-8 mx-auto text-cyan-400 mb-3"></i>
-                    <h3 class="font-semibold text-white">SQL (MySQL)</h3>
-                </div>
+        <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <article class="glass rounded-xl p-5">
+            <i data-lucide="database" class="h-7 w-7 text-cyan-300"></i>
+            <h3 class="mt-4 font-bold text-white">Programming & Databases</h3>
+            <p class="mt-2 leading-6 text-slate-400">SQL, MySQL, Google BigQuery, Python, Pandas</p>
+          </article>
 
-                <div class="p-4 glass-card rounded-lg text-center hover:bg-slate-800 transition-colors">
-                    <i data-lucide="code" class="w-8 h-8 mx-auto text-blue-400 mb-3"></i>
-                    <h3 class="font-semibold text-white">Python · Pandas</h3>
-                </div>
+          <article class="glass rounded-xl p-5">
+            <i data-lucide="chart-column" class="h-7 w-7 text-cyan-300"></i>
+            <h3 class="mt-4 font-bold text-white">Data Visualization</h3>
+            <p class="mt-2 leading-6 text-slate-400">Power BI, DAX, Power Query, Tableau</p>
+          </article>
 
-                <div class="p-4 glass-card rounded-lg text-center hover:bg-slate-800 transition-colors">
-                    <i data-lucide="bar-chart-2" class="w-8 h-8 mx-auto text-yellow-400 mb-3"></i>
-                    <h3 class="font-semibold text-white">Power BI · DAX</h3>
-                </div>
+          <article class="glass rounded-xl p-5">
+            <i data-lucide="table" class="h-7 w-7 text-cyan-300"></i>
+            <h3 class="mt-4 font-bold text-white">Data Analysis</h3>
+            <p class="mt-2 leading-6 text-slate-400">Excel, Pivot Tables, VLOOKUP, EDA, data cleaning, ETL</p>
+          </article>
 
-                <div class="p-4 glass-card rounded-lg text-center hover:bg-slate-800 transition-colors">
-                    <i data-lucide="layout" class="w-8 h-8 mx-auto text-purple-400 mb-3"></i>
-                    <h3 class="font-semibold text-white">Tableau</h3>
-                </div>
-
-                <div class="p-4 glass-card rounded-lg text-center hover:bg-slate-800 transition-colors">
-                    <i data-lucide="table" class="w-8 h-8 mx-auto text-green-400 mb-3"></i>
-                    <h3 class="font-semibold text-white">Excel · Power Query</h3>
-                </div>
-
-                <div class="p-4 glass-card rounded-lg text-center hover:bg-slate-800 transition-colors">
-                    <i data-lucide="cloud" class="w-8 h-8 mx-auto text-orange-400 mb-3"></i>
-                    <h3 class="font-semibold text-white">Google Cloud · BigQuery</h3>
-                </div>
-            </div>
+          <article class="glass rounded-xl p-5">
+            <i data-lucide="laptop" class="h-7 w-7 text-cyan-300"></i>
+            <h3 class="mt-4 font-bold text-white">Developer Tools</h3>
+            <p class="mt-2 leading-6 text-slate-400">VS Code, Jupyter Notebook, Google Colab, Git, GitHub, Google Sheets</p>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="px-5 py-20">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="section-title text-3xl font-bold text-white">Education</h2>
+
+        <article class="glass mt-10 rounded-2xl p-6 md:p-8">
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-white">
+                Bachelor of Technology — Electronics and Communication Engineering
+              </h3>
+              <p class="mt-2 leading-7 text-slate-300">
+                Vel Tech Rangarajan Dr. Sagunthala R&amp;D Institute of Science &amp; Technology
+              </p>
+              <p class="mt-1 text-slate-400">Chennai, India</p>
+            </div>
+
+            <span class="w-fit rounded-full bg-slate-800 px-3 py-2 text-sm text-slate-300">
+              July 2020 – October 2024
+            </span>
+          </div>
+
+          <p class="mt-5 text-slate-300">
+            CGPA: <span class="font-bold text-cyan-300">7.73</span>
+          </p>
+        </article>
+      </div>
     </section>
 
     <!-- Certifications -->
-    <section id="certifications" class="py-20 bg-slate-800/30">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4">
-                    <span class="border-b-4 border-cyan-500 pb-2">Certifications</span>
-                </h2>
+    <section id="certifications" class="border-y border-slate-800/70 bg-slate-900/50 px-5 py-20">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="section-title text-3xl font-bold text-white">Certifications</h2>
+
+        <div class="mt-10 grid gap-4 md:grid-cols-2">
+          <article class="glass flex items-start gap-4 rounded-xl p-5">
+            <i data-lucide="award" class="mt-1 h-6 w-6 shrink-0 text-cyan-300"></i>
+            <div>
+              <h3 class="font-semibold text-white">SQL Certification: Basic to Advanced</h3>
+              <p class="mt-1 text-sm text-slate-400">Geekster · 2024</p>
             </div>
+          </article>
 
-            <div class="max-w-3xl mx-auto grid gap-4">
-                <div class="flex items-center justify-between p-4 bg-slate-800/50 border border-slate-700 rounded-lg">
-                    <div class="flex items-center gap-4">
-                        <div class="p-2 bg-green-500/10 text-green-400 rounded-full">
-                            <i data-lucide="award" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-slate-200">SQL Certification: Basic to Advanced</h4>
-                            <p class="text-sm text-slate-500">Geekster</p>
-                        </div>
-                    </div>
-                    <span class="text-sm font-mono text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-700 hidden sm:block">2024</span>
-                </div>
+          <article class="glass flex items-start gap-4 rounded-xl p-5">
+            <i data-lucide="award" class="mt-1 h-6 w-6 shrink-0 text-cyan-300"></i>
+            <div>
+              <h3 class="font-semibold text-white">Data Analytics Professional Course</h3>
+              <p class="mt-1 text-sm text-slate-400">Geekster · 2025</p>
+            </div>
+          </article>
 
-                <div class="flex items-center justify-between p-4 bg-slate-800/50 border border-slate-700 rounded-lg">
-                    <div class="flex items-center gap-4">
-                        <div class="p-2 bg-green-500/10 text-green-400 rounded-full">
-                            <i data-lucide="award" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-slate-200">Data Analytics Professional Course</h4>
-                            <p class="text-sm text-slate-500">Geekster</p>
-                        </div>
-                    </div>
-                    <span class="text-sm font-mono text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-700 hidden sm:block">2025</span>
-                </div>
+          <article class="glass flex items-start gap-4 rounded-xl p-5">
+            <i data-lucide="award" class="mt-1 h-6 w-6 shrink-0 text-cyan-300"></i>
+            <div>
+              <h3 class="font-semibold text-white">Excel Skills for Business</h3>
+              <p class="mt-1 text-sm text-slate-400">Goldman Sachs · Forage · 2024</p>
+            </div>
+          </article>
 
-                <div class="flex items-cent
+          <article class="glass flex items-start gap-4 rounded-xl p-5">
+            <i data-lucide="award" class="mt-1 h-6 w-6 shrink-0 text-cyan-300"></i>
+            <div>
+              <h3 class="font-semibold text-white">Getting Started
